@@ -2,6 +2,10 @@
 
 **Prove you're a trustworthy actor — without revealing who you are.**
 
+### 📱 [⬇ Download the Android APK](https://github.com/Jtel-ZTIP-w3c/Jtel-ZTIP-w3c.github.io/releases/download/v0.1/tibet-resolve-debug.apk)  ·  🌐 [Landing](https://jtel-ztip-w3c.github.io)  ·  📖 [Cookbook](./docs/cookbook.md)
+
+*(Android 12+, sideload — your phone will ask to allow install from this source.)*
+
 Two Android phones. One **offers** an identity claim, the other **verifies** it. The verifier's
 screen shows `✅ 18 or older`, `signature verified ✓`, and a line listing exactly what did **not**
 cross the wire — name, document number, date of birth, photo. Every step prints live, with timing.
