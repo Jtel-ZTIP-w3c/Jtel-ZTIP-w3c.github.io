@@ -53,7 +53,7 @@ Phone B  →  role: Terminal (verify)  →  tap A against B
 No second phone?  →  type a .aint, hit "Verify online" — the same validator, in-band.
 ```
 
-**APK:** latest [Release](../../releases/latest) · Android 12+ · `arm64-v8a` · NFC optional.
+**APK:** latest [Release](https://github.com/Jtel-ZTIP-w3c/Jtel-ZTIP-w3c.github.io/releases/latest) · Android 12+ · `arm64-v8a` · NFC optional.
 **Read along:** [docs/cookbook.md](./docs/cookbook.md) — every step, line by line.
 
 ---
