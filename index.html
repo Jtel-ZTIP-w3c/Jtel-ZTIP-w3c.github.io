@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZTIP — Zero-Trust Identification Protocol</title>
+<style>
+  :root { --bg:#0d1117; --fg:#c9d1d9; --dim:#8b949e; --acc:#3fb950; --acc2:#58a6ff; --line:#21262d; --warn:#d29922; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 22px 80px; }
+  h1 { font-size:30px; margin:0 0 4px; letter-spacing:-.5px; }
+  h1 .z { color:var(--acc); }
+  .tag { color:var(--dim); font-size:17px; margin:0 0 28px; }
+  h2 { font-size:15px; text-transform:uppercase; letter-spacing:1.5px; color:var(--acc2);
+       margin:38px 0 12px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  code,pre,.mono { font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace; }
+  pre { background:#010409; border:1px solid var(--line); border-radius:8px;
+        padding:16px; overflow-x:auto; font-size:13.5px; line-height:1.5; }
+  .ok { color:var(--acc); } .no { color:#f85149; } .lock { color:var(--warn); } .dim { color:var(--dim); }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; margin:6px 0; }
+  th,td { text-align:left; padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--dim); font-weight:600; text-transform:uppercase; font-size:11px; letter-spacing:.5px; }
+  td.mono { font-family:"SF Mono",ui-monospace,Menlo,monospace; color:var(--acc2); white-space:nowrap; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .card { border:1px solid var(--line); border-radius:8px; padding:14px 16px; }
+  .card h3 { margin:0 0 6px; font-size:14px; }
+  a { color:var(--acc2); text-decoration:none; } a:hover { text-decoration:underline; }
+  .links a { display:inline-block; margin:0 14px 8px 0; }
+  .foot { color:var(--dim); font-size:13px; margin-top:40px; border-top:1px solid var(--line); padding-top:16px; }
+  @media (max-width:560px){ .two{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1><span class="z">ZTIP</span> — Zero-Trust Identification Protocol</h1>
+  <p class="tag">Prove you're a trustworthy actor — without revealing who you are.</p>
+
+  <p><em>Identification</em> here means proving you're a distinct, attestable actor —
+  not disclosing who you are. Nothing is trusted up front; each fact is proven fresh,
+  per task, and then forgotten. <strong>The whole idea fits on this page, and the
+  proof fits in a five-minute tap.</strong></p>
+
+  <h2>The shift</h2>
+  <div class="two">
+    <div class="card"><h3>IAM</h3><p class="dim" style="margin:0">A database that
+      <strong>remembers</strong> who you are. Every check is a lookup; the relying party
+      learns and logs your identity.</p></div>
+    <div class="card"><h3>ZTIP</h3><p class="dim" style="margin:0">No store. A short,
+      signed attestation that a <strong>fact</strong> holds — verified point-of-use, then
+      <strong>forgotten</strong>.</p></div>
+  </div>
+  <p class="dim" style="margin-top:10px"><em>IAM remembers who you are. ZTIP forgets you the
+  moment it's sure you qualify.</em></p>
+
+  <h2>Tap it (5 minutes)</h2>
+  <pre>Phone A  →  claim a .aint  →  (optional) bind a DEMO passport  →  role: <b>User</b> (offer)
+Phone B  →  role: <b>Terminal</b> (verify)  →  <b>tap A against B</b>
+
+No second phone?  →  type a .aint, hit <b>Verify online</b> — the same validator, in-band.</pre>
+  <p style="margin:6px 0 0"><a href="../../releases/latest">⬇ Download the APK (latest release)</a>
+   · Android 12+ · NFC optional (online path works without).</p>
+
+  <h2>What Phone B shows</h2>
+  <pre>── VERDICT · who/what: <b>human</b> · vandemeent.aint
+   signature   VINK set signed &amp; verified <span class="ok">✓</span> (Ed25519 against key-matched .aint)
+   claim       <span class="ok">✅ 18 or older</span>
+   claim       <span class="ok">✅ valid passport</span>
+   claim       <span class="ok">✅ Dutch national</span>
+   attestation key MATCH · six-rule PASS (6/6) · fresh (54s TTL) · online AINS
+   not received <span class="dim">name · document number · date of birth · facial image</span>
+                <span class="dim">— only the tick crossed the wire</span></pre>
+  <p class="dim" style="margin:6px 0 0">Find your name in that output. You can't — it never left
+  the phone. That absence is the whole point.</p>
+
+  <h2>Verify it yourself (no app — just a terminal)</h2>
+  <p>Name resolution is a real, public endpoint. Resolve any <code>.aint</code> and read the live
+  Ed25519 key the handshake matches against:</p>
+  <pre>curl -s -H "User-Agent: ztip" https://api.ainternet.org/api/ains/resolve/root_idd | jq .record
+<span class="dim"># → { "public_key": "6aab3fb5…", "status": "active", "entity_type": "idd", … }</span></pre>
+  <p class="dim" style="margin:6px 0 0">Claim your own <code>.aint</code> in the app, then resolve
+  <em>that</em>. The resolve you watch in the app is the resolve you can run yourself — nothing staged.</p>
+
+  <h2>The seven steps (read along live)</h2>
+  <table>
+    <tr><th>#</th><th>step</th><th>primitive / crypto</th><th>transport</th><th>side</th></tr>
+    <tr><td>1</td><td>offer + VINK set</td><td class="mono">Ed25519 sign</td><td>NFC HCE</td><td>offerer</td></tr>
+    <tr><td>2</td><td>read</td><td class="mono">SELECT AID</td><td>NFC reader</td><td>terminal</td></tr>
+    <tr><td>3</td><td>resolve</td><td class="mono">AINS /resolve</td><td>HTTPS</td><td>name server</td></tr>
+    <tr><td>4</td><td>key-match</td><td class="mono">pubkey ≟ resolved</td><td>local</td><td>terminal</td></tr>
+    <tr><td>5</td><td>six-rule</td><td class="mono">tibet-iddrop .so</td><td>local</td><td>terminal</td></tr>
+    <tr><td>6</td><td>VINK verify</td><td class="mono">Ed25519 verify</td><td>local</td><td>terminal</td></tr>
+    <tr><td>7</td><td>verdict</td><td class="dim">—</td><td>screen</td><td>terminal</td></tr>
+  </table>
+  <p style="margin:6px 0 0"><a href="./docs/cookbook.md">→ Full cookbook</a> — what each line means,
+  what crosses the tap, and what stays on the device. Honest about proven vs scaffolded.</p>
+
+  <h2>A rule, applied — not a person</h2>
+  <pre>verify  age ≥ 18 · context: online shopping · jurisdiction: NL
+<span class="no">→ a 13-year-old's passport answers ❌ NOPE</span> — the gate never sees the birth date, only "no".</pre>
+  <p class="dim" style="margin:6px 0 0">Rules live with the verifier (the industry); identity lives
+  with you. The attestation is the thin bridge — verified on basic facts, sharing none of the
+  characteristics that identify you as a person.</p>
+
+  <h2>One resolver, many actors</h2>
+  <p>The same seven steps carry a <strong>human</strong>, an <strong>AI</strong>, or an
+  <strong>IoT device</strong> — only the proof-of-trust vocabulary differs:</p>
+  <pre>human  → fresh biometric + state credential   (continuity)
+AI     → mandate chain + causal step           (not persistence — it's stateless between calls)
+IoT    → unbroken substrate / behaviour pattern</pre>
+  <p class="dim" style="margin:6px 0 0">This is why ZTIP isn't an age-gate. It's a way for any
+  actor to say "I'm trustworthy for <em>this</em>" — and for an AI, that's the honest model: it
+  re-derives its right to act each time, carrying nothing.</p>
+
+  <h2>Honest notes</h2>
+  <ul class="dim">
+    <li><strong>jis:, not did:</strong> — no W3C DID-method claim; the identifier is an Ed25519
+      key under a <code>jis:</code> scheme, with VC-shape interop. The function DID aimed at,
+      working today.</li>
+    <li><strong>Signed predicates + selective disclosure</strong> now; zero-knowledge (BBS+,
+      unlinkable) is the direction, not yet claimed.</li>
+    <li><strong>DEMO credentials</strong> are labelled <code>(DEMO)</code> end-to-end — the
+      technique is identical with or without; the flag only marks a test fixture, never fakes a real one.</li>
+    <li>These are <strong>Internet-Drafts (work in progress)</strong> — please cite as such.
+      The app is the falsifiable artifact: tap it.</li>
+  </ul>
+
+  <h2>Links</h2>
+  <p class="links">
+    <a href="https://crates.io/crates/tibet-iddrop">SDK · tibet-iddrop (crate)</a>
+    <a href="https://datatracker.ietf.org/doc/draft-vandemeent-iddrop/">IETF · draft-vandemeent-iddrop</a>
+    <a href="https://humotica.com">humotica.com</a>
+  </p>
+
+  <p class="foot">computo et comprobo, ergo fui — attestor, ergo nunc sum.<br>
+  I compute and verify, therefore I <em>was</em>; I attest, therefore <em>now</em> I am.</p>
+
+</div>
+</body>
+</html>
