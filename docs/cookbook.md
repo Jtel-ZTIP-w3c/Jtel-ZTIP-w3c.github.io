@@ -121,15 +121,32 @@ in its own terms, without a central registry of who-it-is.
 
 ---
 
-## 8. Honest scope
+## 8. Honest scope (what's built vs what's specified)
 
+The drafts describe more than this demo implements — on purpose, they're forward-looking. So,
+plainly, to save you the diff:
+
+- **Built here:** offer-first mode (NFC tap), AINS resolve + Ed25519 key-match, the on-device
+  six-rule validator, the signed-VINK attestation layer, revoke→tombstone.
+- **Specified, not built here:** request-first mode (the system/daemon lane) and the
+  **sealed-carrier response** (TZA/TBZ v2) from the `iddrop` draft. The `seal` stage in the
+  demo is scaffolded.
+- **Which draft is which:** `draft-vandemeent-iddrop` is the *transfer/handshake* (offer/request/
+  validate). The *attestation* layer the demo leads with — the signed VINKs — lives with
+  `draft-vandemeent-jis-identity` (attestation semantics, pubkey-bound claims), and is ahead of
+  the iddrop `-00`. If you're here for the "active attestations" idea, JIS is the spec to read.
+- **About the "6/6":** the validator runs the rules that apply to offer-first. The sealed-carrier
+  checks (Rule 1 carrier truth, Rule 3 receiver-binding of a *sealed response*) belong to the
+  system lane and are not exercised in this demo. Don't read 6/6 as "all six fully enforced incl.
+  sealed transfer."
 - Signed predicates + selective disclosure **now**; zero-knowledge (BBS+, unlinkable) is the
   direction, not yet claimed.
 - Full CSCA passive-authentication of the passport chip is **Phase 2**; the demo verifies the
   chip signature is present and reads the data groups.
-- `jis:` is deliberately **not** a W3C DID method (per Will Abramson's advice — stay out of the
-  DID-method maze). VC-shape interop, yes; DID-Core compliance, not claimed.
-- These are **Internet-Drafts (work in progress)**: `draft-vandemeent-iddrop`,
-  `-ains-discovery`, `-jis-identity`, `-tibet-causal-time`, `-tibet-tat`, `-continuity-envelope`.
+- `jis:` is deliberately **not** a W3C DID method (stay out of the DID-method maze). VC-shape
+  interop, yes; DID-Core compliance, not claimed.
+- All of the above are **Internet-Drafts (work in progress)**: `draft-vandemeent-jis-identity`
+  (identity + attestation), `draft-vandemeent-iddrop` (transfer), `-ains-discovery`,
+  `-tibet-provenance`, `-tibet-causal-time`.
 
-*The app is the falsifiable artifact. Tap it.*
+*Read it, build it, break it.*
