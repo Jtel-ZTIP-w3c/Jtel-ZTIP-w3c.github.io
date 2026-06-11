@@ -78,6 +78,14 @@ Each grows from one root.
 > mint their own `.aint`; policy just never trusts a name without its key. *(Conformance: see
 > ztip-conformance `v4`.)*
 
+> **On `did:`.** `did:` is acceptable as an outer, passive **compatibility envelope** — an
+> *identifier* — precisely because it is **never allowed to be authority**. A `jis:` system
+> resolves a `did:` as a name and binds trust to the key behind it, never to the document; the
+> passivity *is* the safety (a name that can't be authority can't be weaponised). `jis:` ⊋
+> `did:` by a one-way projection — you can wrap the active primitive into the static envelope,
+> never the reverse; a snapshot is not a live process. **did: names you; jis: proves you.**
+> *(Runnable: ztip-conformance `v9`.)*
+
 The integrity-branch backbone is provenance: UPIP's proof model is `state/deps/process/result/verify`. JIS can add actor-binding, but the spine is TIBET.
 
 ## L2 · Control & transfer primitives
