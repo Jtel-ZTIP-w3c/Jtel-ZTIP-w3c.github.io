@@ -70,6 +70,14 @@ Each grows from one root.
 | **TBZ / .tza** — sealed carrier | sealed, content-addressed transfer container — what continuity envelopes, TAT transfers and file-drops ride in | TIBET (+ SSM routing) | vectors: [tibet-conformance-vectors](https://github.com/jaspertvdm/tibet-conformance-vectors) (tbz wire-format) |
 | **UPIP** — process integrity | reproducible execution bundle (state · deps · process · result · verify) | TIBET evidence (may bind actors via JIS) | [draft-vandemeent-upip-process-integrity](https://datatracker.ietf.org/doc/draft-vandemeent-upip-process-integrity/) |
 
+> **AINS names are namespace entries, not identities.** Identity is the **JIS key**
+> (`jis:ed25519:…`); **`.aint`** is the discovery namespace; **SSM** is the semantic surface.
+> A resolver may use hash-qualified `vandemeent-<suffix>.aint` names for collision resistance
+> (suffix = `base32(sha256(pubkey ‖ "|aint|1"))[:6]`, a recomputable disambiguator), but every
+> trust decision MUST bind to the resolved JIS actor key — never the pretty name. Everyone may
+> mint their own `.aint`; policy just never trusts a name without its key. *(Conformance: see
+> ztip-conformance `v4`.)*
+
 The integrity-branch backbone is provenance: UPIP's proof model is `state/deps/process/result/verify`. JIS can add actor-binding, but the spine is TIBET.
 
 ## L2 · Control & transfer primitives
