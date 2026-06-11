@@ -6,8 +6,8 @@ catalogue.
 
 **What's in (the rule):** a thing belongs here only if it (1) defines a wire/crypto
 **primitive** (its own IETF draft), (2) is a **sealed wire-format** (`.tza`), (3) is an
-**enforcement** decision-maker (produces allow/deny/quarantine/null-route), or (4) is the
-**runtime substrate** the rest executes on (trust-kernel). One-line test: *does it define a
+**enforcement primitive** (consumes trust signals, produces a verdict: allow/deny/quarantine/
+null-route), or (4) is the **runtime substrate** the rest executes on (trust-kernel). One-line test: *does it define a
 primitive, produce a trust verdict, or run the substrate? → in. Else → out.*
 
 **What's out:** the apps (ID-Drop, KIT, cmail, Humotica) and the ~90 supporting runtime /
@@ -92,11 +92,11 @@ implements it is a product — see L6.
 
 ## L4 · Enforcement
 
-The decision layer. SNAFT, NullRouteMux and Cortex are enforcement **implementations**
-(products), not wire primitives — but the enforcement *role* is load-bearing, so the atlas
-names the layer (without dragging in the rest of the runtime packages). They consume the
-trust signals below and emit a verdict (`verdict.v1`-shaped: allow / deny / quarantine /
-null-route — the same contract the airlock runtime enforces).
+The decision layer. SNAFT, NullRouteMux and Cortex are **not apps — they are enforcement
+primitives**: they consume trust signals and produce verdicts. Their concrete packages live
+in `stack-position-map.yml`; this atlas names the interop **role** and the **verdict shape**
+(`verdict.v1`: allow / deny / quarantine / null-route — the same contract the airlock
+runtime enforces).
 
 | Enforcer | Role | Consumes | Produces |
 |---|---|---|---|
@@ -104,8 +104,8 @@ null-route — the same contract the airlock runtime enforces).
 | **NullRouteMux** | routing enforcement (silent null-route, the "0x00 of last resort") | JIS · SSM · RVP posture | route / null-route |
 | **Cortex** | consent / permission gates (zero-trust knowledge & capability access) | JIS · RVP · policy | allow / deny |
 
-Implementations live in the package map (`snaft`/`tibet-snaft`, `tibet-mux`, `tibet-cortex`);
-the primitives above are what they read.
+Implementing packages: `snaft`/`tibet-snaft`, `tibet-mux`, `tibet-cortex` — what they *read*
+is the primitives above.
 
 ## L5 · Conformance vectors (runnable proof)
 
