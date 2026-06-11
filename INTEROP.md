@@ -16,7 +16,14 @@ map is `stack-position-map.yml`. Keeping them out is what keeps this atlas reada
 
 Identifier scheme is **`jis:`**, never `did:` — Ed25519 keys under our own URI scheme, with
 VC-shape interop but no DID-Core method claim. All ten drafts below are **active
-Internet-Drafts** on the IETF datatracker (verified 2026-06-11).
+Internet-Drafts** on the IETF datatracker (maintained by us; status checked 2026-06-11) —
+several still at `-00` because the first revision cycle is waiting on external review, and
+early changes came from pentest-driven fixes, not datatracker critique.
+
+> **On IETF status.** The datatracker is openness of the tech, not a stamp of approval.
+> Absence of critique there is **not** treated as validation. The drafts stay
+> work-in-progress; revisions are driven by implementation, conformance vectors, pentest
+> findings, and external review.
 
 The shape on purpose: two roots, branches that grow from each, control/transfer primitives
 above them, and composition protocols where the roots meet. ZTIP is **composition** — the
