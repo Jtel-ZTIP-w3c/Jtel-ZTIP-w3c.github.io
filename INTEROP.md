@@ -85,6 +85,13 @@ RVP is neither an app nor an evidence object — it is a control primitive *abov
 TAT is not pure JIS and not pure TIBET: re-attestation is an identity act, but the
 transfer/envelope/proof is provenance-shaped.
 
+**Fresh-assurance lives here, under RVP — not under the offer.** Honoring a live attestation
+(`live_presence` / `rightful_holder`) *only while fresh*, and **rejecting stale assurance**,
+is RVP's runtime gate: untrusted-until-renewed, in one check. That is precisely the bridge
+between identity (a fresh JIS attestation) and continuous verification — a stored or replayed
+assurance is, by construction, stale and refused. Its runnable vectors are
+[ztip-conformance `v5`](https://github.com/Jtel-ZTIP-w3c/ztip-conformance).
+
 ## L3 · Composition protocols
 
 Where the roots meet. **ZTIP is a composition primitive, not a JIS leaf.**
