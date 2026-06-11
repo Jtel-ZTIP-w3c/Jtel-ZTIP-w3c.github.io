@@ -83,6 +83,19 @@ No second phone?  →  type a .aint, hit <b>Verify online</b> — the same valid
   <p class="dim" style="margin:6px 0 0">Claim your own <code>.aint</code> in the app, then resolve
   <em>that</em>. The resolve you watch in the app is the resolve you can run yourself — nothing staged.</p>
 
+  <h2>Interoperate it yourself (no vendor)</h2>
+  <p>Don't read the spec — <strong>run it</strong>. The conformance kit builds signed VINK
+  test-vectors and checks them with a second, independent implementation. Green means a
+  stranger can re-implement the handshake from the spec alone and interoperate — no shared
+  code, no original team in the loop. (And it answers a fair worry: "is this just AI text?"
+  No — it's runnable, in 30 seconds.)</p>
+  <pre>git clone https://github.com/Jtel-ZTIP-w3c/ztip-conformance
+cd ztip-conformance &amp;&amp; ./run.sh
+<span class="dim"># →</span> <span class="ok">YES IT PLAYS — all cases interop. Independent impl agrees, no vendor needed.</span></pre>
+  <p class="dim" style="margin:6px 0 0">Reproducible (fixed seed, deterministic Ed25519) and
+  built one primitive at a time — the <a href="https://github.com/Jtel-ZTIP-w3c/ztip-conformance/blob/main/ROADMAP.md">roadmap</a>
+  tells you what to run next. <a href="https://github.com/Jtel-ZTIP-w3c/ztip-conformance">→ ztip-conformance</a></p>
+
   <h2>The seven steps (read along live)</h2>
   <table>
     <tr><th>#</th><th>step</th><th>primitive / crypto</th><th>transport</th><th>side</th></tr>
