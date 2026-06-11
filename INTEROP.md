@@ -4,6 +4,16 @@ The map of the load-bearing **interop surface** — the small set of things a se
 implementation must agree on to interoperate, with no vendor in the loop. Not the product
 catalogue.
 
+> **Identity invariant.**
+> - `.aint` names are semantic **namespace** entries, not identities.
+> - **SSM** labels the semantic **surface**, not the actor.
+> - The canonical actor identity is the resolved **JIS Ed25519 key**.
+> - **All trust decisions MUST bind to the JIS key** — never to the `.aint` label alone.
+>
+> DID/VC is a useful publication & compatibility envelope; **JIS/SSM is the active runtime
+> primitive.** You can wrap the active primitive into a passive envelope, never the reverse —
+> a snapshot is not a live process. (Runnable: ztip-conformance `v4`, `v9`.)
+
 **What's in (the rule):** a thing belongs here only if it (1) defines a wire/crypto
 **primitive** (its own IETF draft), (2) is a **sealed wire-format** (`.tza`), (3) is an
 **enforcement primitive** (consumes trust signals, produces a verdict: allow/deny/quarantine/
