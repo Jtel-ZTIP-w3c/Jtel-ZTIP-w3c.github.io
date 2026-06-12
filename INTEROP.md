@@ -149,12 +149,17 @@ is the primitives above.
 
 ## L5 · Conformance vectors (runnable proof)
 
-Two repos, one per root branch. Run them; green = a stranger interoperates, no vendor needed.
+A growing **conformance series** — one runnable kit per layer of the stack. Run them; green
+means a stranger can interoperate with no vendor in the loop. Together they let a second
+implementation reconstruct the **whole spine**, layer by layer, from the vectors alone — which
+is the point. The structure is too useful, and too needed, to keep unique.
 
 | Repo | Proves |
 |---|---|
-| [ztip-conformance](https://github.com/Jtel-ZTIP-w3c/ztip-conformance) | ZTIP / VINK / offer composition — v1 VINK ✅ · v2 offer ✅ · v3 NFC 🔜 |
+| [ztip-conformance](https://github.com/Jtel-ZTIP-w3c/ztip-conformance) | ZTIP / VINK / offer / ceremony composition — v1–v9 ✅ + live capstone |
+| [tibet-comms-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-comms-conformance) | comms branch — ping, AINS sendpath, mux lane, overlay-route identity, I-Poll, Cmail, gateway egress, null-route — v1–v9 ✅ |
 | [tibet-conformance-vectors](https://github.com/jaspertvdm/tibet-conformance-vectors) | TIBET / evidence primitives — continuity intake + tbz wire-format ✅ |
+| tibet-evidence-conformance · tibet-security-conformance | the evidence and enforcement branches — coming, same recipe |
 
 ## L6 · Applications — explicitly out of scope
 
