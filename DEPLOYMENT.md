@@ -75,12 +75,19 @@ afterthoughts. The exit is part of the design.
 
 **11. Leave no trace — the run is airlocked and self-cleaning.**
 The execution itself is ephemeral. It runs in an airlock and cleans itself up completely — the way
-a phantom session self-destructs after it seals. What survives is only the **outcome**, and the
-outcome is *reproducible on demand*, never a stored process or its content. Even the outcome need
-not persist: it can be served from a throwaway sandbox endpoint, read once, and gone. Proof becomes
-something you *regenerate*, not something you *hoard*. Nothing accumulates.
-*Check:* after a run, go looking for the process, its inputs, its intermediate state. Finding any of
-it — beyond a reproducible result you deliberately chose to keep — is the failure.
+a phantom session self-destructs after it seals. What survives is only the **outcome**, *reproducible
+on demand*, never a stored process or its content; even the outcome can be served from a throwaway
+sandbox endpoint, read once, and gone. Proof becomes something you *regenerate*, not something you
+*hoard*.
+
+This is the **default for an autonomous actor** — an unsupervised agent must not let intermediate
+artifacts pile up on disk; ephemeral-by-default is hygiene and safety at once. For a human doing
+ordinary, supervised work it is optional, sometimes overkill. And "leave no trace" is not "keep
+nothing": what you may keep is a **thin, curated record** — the distilled outcome plus a journal of
+the sources used and the key points — not the heap of intermediate files. The heap is reproducible
+on demand; the journal is the part a human actually wanted.
+*Check:* after a run, go looking for the process, its inputs, its intermediate state. Finding the
+heap — beyond a result and a journal you deliberately chose to keep — is the failure.
 
 ---
 
