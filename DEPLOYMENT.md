@@ -79,12 +79,14 @@ Revocation (tombstone), recovery (passkey / QR), and migration are first-class p
 afterthoughts. The exit is part of the design.
 *Check:* revoke → you are out, locally and online, with no one's permission needed but your own.
 
-**11. Leave no trace — the run is airlocked and self-cleaning.**
-The execution itself is ephemeral. It runs in an airlock and cleans itself up completely — the way
-a phantom session self-destructs after it seals. What survives is only the **outcome**, *reproducible
-on demand*, never a stored process or its content; even the outcome can be served from a throwaway
-sandbox endpoint, read once, and gone. Proof becomes something you *regenerate*, not something you
-*hoard*.
+**11. Ephemeral Evidence — the dark room.**
+Proof is a reproducible outcome, not a stored log. Executions run in a temporary airlock and
+evaporate completely on completion — the way a phantom session self-destructs after it seals. The
+outcome is disclosed *once*, through a throwaway sandbox endpoint, after which the environment
+destroys itself. This is not weaker evidence, it is **better** evidence: we trust the **causal
+certainty of the TIBET runtime at the moment itself**, not dead, tamperable data reconstructed after
+the fact. A stored log is forensic and manipulable; a live causal step — verified as it happens and
+regenerable on demand — is neither. No data-hoarding, no environmental footprint, no trace.
 
 This is the **default for an autonomous actor** — an unsupervised agent must not let intermediate
 artifacts pile up on disk; ephemeral-by-default is hygiene and safety at once. For a human doing
