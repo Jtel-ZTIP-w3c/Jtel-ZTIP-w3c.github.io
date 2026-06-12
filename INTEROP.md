@@ -75,7 +75,7 @@ Each grows from one root.
 |---|---|---|---|
 | **AINS** — discovery | name → key / actor / capability resolve, over JIS identities | JIS | [draft-vandemeent-ains-discovery](https://datatracker.ietf.org/doc/draft-vandemeent-ains-discovery/) |
 | **Continuity envelope** | continuity object/envelope — the arrival/history carrier | TIBET | [draft-vandemeent-continuity-envelope](https://datatracker.ietf.org/doc/draft-vandemeent-continuity-envelope/) |
-| **Causal Time** | happened-before / concurrency / causal ordering (CausalGuard) | TIBET (+ JIS lanes) | [draft-vandemeent-tibet-causal-time](https://datatracker.ietf.org/doc/draft-vandemeent-tibet-causal-time/) |
+| **Causal Time** | happened-before / concurrency / causal ordering (CausalGuard) — *cross-cutting*: consumed by all four conformance families (see L5) | TIBET (+ JIS lanes) | [draft-vandemeent-tibet-causal-time](https://datatracker.ietf.org/doc/draft-vandemeent-tibet-causal-time/) |
 | **Semantic Surface Manifest** | sealed objects routable by semantic surface — without trusting name or content | TIBET | [draft-vandemeent-tibet-semantic-surface-manifest](https://datatracker.ietf.org/doc/draft-vandemeent-tibet-semantic-surface-manifest/) |
 | **TBZ / .tza** — sealed carrier | sealed, content-addressed transfer container — what continuity envelopes, TAT transfers and file-drops ride in | TIBET (+ SSM routing) | vectors: [tibet-conformance-vectors](https://github.com/jaspertvdm/tibet-conformance-vectors) (tbz wire-format) |
 | **UPIP** — process integrity | reproducible execution bundle (state · deps · process · result · verify) | TIBET evidence (may bind actors via JIS) | [draft-vandemeent-upip-process-integrity](https://datatracker.ietf.org/doc/draft-vandemeent-upip-process-integrity/) |
@@ -165,6 +165,34 @@ tested through the four.)
 
 (The earlier [tibet-conformance-vectors](https://github.com/jaspertvdm/tibet-conformance-vectors)
 holds the original tbz/continuity wire-format vectors, now folded under the evidence branch.)
+
+### Cross-cutting primitives — Causal Time & UPIP
+
+Two primitives are **not** a family of their own — they are consumed by all four. The atlas notes
+them here so a second implementation knows to exercise them in *every* branch, not just one.
+
+**Causal Time (TimeVector)** — *ordering / happened-before*, rooted in TIBET provenance + JIS actor
+lanes. The same primitive everywhere; each family asks a different question of it:
+
+| Family | What TimeVector settles | Where exercised |
+|---|---|---|
+| ztip | is this action causally valid **and fresh**? (challenge-response, offer-first ceremony, TAT re-attestation, entity-class proof) | freshness paths in `v5`/`v6`/`v7` ✅ |
+| evidence | in what causal **order** did these objects/events arise? (continuity envelope, CBOM chain, trail, wayback) | dedicated causal-order vector 🔜 |
+| comms | ack / delivery / round-trip **ordering** | ordering vector 🔜 |
+| security | **stale / replay / causal-impossibility** (enforcement consumption) | replay / causal-impossible vector 🔜 |
+
+If it must have one home it is **evidence** — TimeVector is ultimately proof-of-order — but it is
+fundamental enough to sit *above* the families. Spec:
+[draft-vandemeent-tibet-causal-time](https://datatracker.ietf.org/doc/draft-vandemeent-tibet-causal-time/).
+
+**UPIP** — *process integrity*: a reproducible execution bundle (`state · deps · process · result ·
+verify`). Its home is the **evidence** branch, and its conformance question is the sharpest in the
+set: *can a stranger reproduce the bundle and get the same result — on any hardware?* The proof is
+self-validating (a UPIP paper regenerates itself via `tibet-triage upip-reproduce`) and runs the
+same on an 8-year-old phone or a MIPS router as on a flagship — which is exactly the
+substrate-level, hardware-agnostic openness the rest of the atlas argues for. Exercised in
+evidence-conformance (restore/report today; an explicit reproduce-verify vector 🔜). Spec:
+[draft-vandemeent-upip-process-integrity](https://datatracker.ietf.org/doc/draft-vandemeent-upip-process-integrity/).
 
 ## L6 · Applications — explicitly out of scope
 
