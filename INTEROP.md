@@ -156,6 +156,11 @@ the vectors alone — which is the point. The structure is too useful, and too n
 unique. (`trust-kernel`/OSAPI is the runtime floor, not a fifth family — its behaviour is already
 tested through the four.)
 
+> **Runtime companion.** The vectors prove the *wire* is open. [DEPLOYMENT.md](DEPLOYMENT.md) — the
+> deployment doctrine — keeps the *running system* sovereign: local, fresh, content-blind,
+> jurisdiction-neutral, reproducible, exitable. Pass the vectors and you have interoperated; hold
+> the doctrine and you have stayed free. Open is both.
+
 | Repo | Branch | Question it settles |
 |---|---|---|
 | [ztip-conformance](https://github.com/Jtel-ZTIP-w3c/ztip-conformance) | identity / attestation / ceremony | actor proof, offer envelopes, freshness, DID-as-namespace boundaries — v1–v9 ✅ + live capstone |
