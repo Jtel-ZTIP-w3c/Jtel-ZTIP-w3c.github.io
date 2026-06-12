@@ -149,17 +149,22 @@ is the primitives above.
 
 ## L5 · Conformance vectors (runnable proof)
 
-A growing **conformance series** — one runnable kit per layer of the stack. Run them; green
-means a stranger can interoperate with no vendor in the loop. Together they let a second
-implementation reconstruct the **whole spine**, layer by layer, from the vectors alone — which
-is the point. The structure is too useful, and too needed, to keep unique.
+A **conformance family** — four runnable kits, one per branch of the stack, kept separate to
+avoid a mega-repo. Run them; green means a stranger can interoperate with no vendor in the loop.
+Together they let a second implementation reconstruct the **whole spine**, branch by branch, from
+the vectors alone — which is the point. The structure is too useful, and too needed, to keep
+unique. (`trust-kernel`/OSAPI is the runtime floor, not a fifth family — its behaviour is already
+tested through the four.)
 
-| Repo | Proves |
-|---|---|
-| [ztip-conformance](https://github.com/Jtel-ZTIP-w3c/ztip-conformance) | ZTIP / VINK / offer / ceremony composition — v1–v9 ✅ + live capstone |
-| [tibet-comms-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-comms-conformance) | comms branch — ping, AINS sendpath, mux lane, overlay-route identity, I-Poll, Cmail, gateway egress, null-route — v1–v9 ✅ |
-| [tibet-conformance-vectors](https://github.com/jaspertvdm/tibet-conformance-vectors) | TIBET / evidence primitives — continuity intake + tbz wire-format ✅ |
-| tibet-evidence-conformance · tibet-security-conformance | the evidence and enforcement branches — coming, same recipe |
+| Repo | Branch | Question it settles |
+|---|---|---|
+| [ztip-conformance](https://github.com/Jtel-ZTIP-w3c/ztip-conformance) | identity / attestation / ceremony | actor proof, offer envelopes, freshness, DID-as-namespace boundaries — v1–v9 ✅ + live capstone |
+| [tibet-comms-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-comms-conformance) | communication / routing | resolve, reach, route, deliver, reject, prove a message — v1–v9 ✅ |
+| [tibet-evidence-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-evidence-conformance) | storage / evidence | store, seal, trace, restore, report evidence objects ✅ |
+| [tibet-security-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-security-conformance) | policy / enforcement | same allow/deny/quarantine/null-route decision, fail closed ✅ |
+
+(The earlier [tibet-conformance-vectors](https://github.com/jaspertvdm/tibet-conformance-vectors)
+holds the original tbz/continuity wire-format vectors, now folded under the evidence branch.)
 
 ## L6 · Applications — explicitly out of scope
 
