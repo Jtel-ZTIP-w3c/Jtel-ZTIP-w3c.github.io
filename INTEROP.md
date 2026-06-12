@@ -163,10 +163,17 @@ tested through the four.)
 
 | Repo | Branch | Question it settles |
 |---|---|---|
-| [ztip-conformance](https://github.com/Jtel-ZTIP-w3c/ztip-conformance) | identity / attestation / ceremony | actor proof, offer envelopes, freshness, DID-as-namespace boundaries — v1–v9 ✅ + live capstone |
-| [tibet-comms-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-comms-conformance) | communication / routing | resolve, reach, route, deliver, reject, prove a message — v1–v9 ✅ |
-| [tibet-evidence-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-evidence-conformance) | storage / evidence | store, seal, trace, restore, report evidence objects ✅ |
-| [tibet-security-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-security-conformance) | policy / enforcement | same allow/deny/quarantine/null-route decision, fail closed ✅ |
+| [ztip-conformance](https://github.com/Jtel-ZTIP-w3c/ztip-conformance) | identity / attestation / ceremony | actor proof, offer envelopes, freshness, DID-as-namespace boundaries — v1–v9, **real Ed25519** + live capstone ✅ |
+| [tibet-comms-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-comms-conformance) | communication / routing | resolve, reach, route, deliver, reject, prove a message — v1–v9, **structural** (placeholder keys; signing `v5`/`v7` next) |
+| [tibet-evidence-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-evidence-conformance) | storage / evidence | store, seal, trace, restore, report — v1–v9, **structural** (logical fixtures; real bytes next) |
+| [tibet-security-conformance](https://github.com/Jtel-ZTIP-w3c/tibet-security-conformance) | policy / enforcement | same allow/deny/quarantine/null-route decision, fail closed — v1–v9, **structural** (logical fixtures; signed verdicts next) |
+
+> **Maturity is labelled, not assumed.** `ztip-conformance` is the reference-mature kit: real
+> Ed25519 signatures a stranger can verify, plus a live capstone. The three TIBET-branch kits prove
+> **decision-logic** conformance today — given the same inputs, a second implementation reaches the
+> same route / order / verdict — on *placeholder* keys and *logical* fixtures. Cryptographic signing
+> and real byte fixtures are the explicit next step in each kit's ROADMAP. Run them and you will see
+> the structural contract hold; you will not yet verify a real signature outside `ztip-conformance`.
 
 (The earlier [tibet-conformance-vectors](https://github.com/jaspertvdm/tibet-conformance-vectors)
 holds the original tbz/continuity wire-format vectors, now folded under the evidence branch.)
