@@ -2,6 +2,12 @@
 
 The companion to the conformance vectors.
 
+> **Conformance** asks: *can a second implementation compute the same answer?*
+> **The deployment doctrine** asks: *can an ordinary actor run it — with no vendor custody, no
+> privileged hardware, and no permanent data-hoarding?*
+>
+> The first keeps the **wire** open. The second keeps the **runtime** free. Open is both.
+
 The [conformance family](INTEROP.md) proves a second implementation can **interoperate** — the
 wire is open, a stranger can rebuild the spine from the vectors with no vendor in the loop. That is
 necessary, not sufficient. A system can pass every vector and still be **captured at runtime**: by
